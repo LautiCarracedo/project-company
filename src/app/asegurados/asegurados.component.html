@@ -1,73 +1,70 @@
-
 <div class='tituloPagina'>
-    Cargar asegurados
+  Cargar asegurados
+</div>
+
+<form [formGroup]="form" (ngSubmit)="crearAsegurado()">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Apellido:</label>
+      </div>
+      <div class="col-sm-8 col-md-3">
+        <input type="text" formControlName="apellido" name="Nombre" class="form-control" placeholder="Apellido" />
+      </div>
+
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Nombre:</label>
+      </div>
+      <div class="col-sm-8 col-md-2">
+        <input type="text" formControlName="nombre" name="Nombre" class="form-control" placeholder="Nombre" />
+      </div>
+
+      <div class="col-sm-4 col-md-1">
+        <label class="col-form-label">DNI:</label>
+      </div>
+      <div class="col-sm-8 col-md-2">
+        <input type="text" formControlName="dni" name="Nombre" class="form-control" placeholder="DNI (sin puntos)" />
+      </div>
+
+      <p>
+
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Compañía:</label>
+      </div>
+      <div class="col-sm-8 col-md-4">
+        <select name="select" formControlName="compania" class="form-control" placeholder="Compañia">
+          <option *ngFor="let opt of opcionesComp" [ngValue]="opt.compania">
+            ‌{{ opt.compania }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Rama:</label>
+      </div>
+      <div class="col-sm-8 col-md-4">
+        <select name="select" formControlName="ramo" class="form-control" placeholder="Rama">
+          <option *ngFor="let opt of opcionesRama" [ngValue]="opt.rama">
+            ‌{{ opt.rama }}
+          </option>
+        </select>
+      </div>
+
+  
+
+
+
+    </div>
+
+    <hr>
+
+    <!-- Botones -->
+    <div class="row justify-content-center botones">
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-plus"> </i>
+        Agregar
+      </button>
+    </div>
   </div>
-
-    <form>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-4 col-md-2">
-              <label class="col-form-label">Apellido:</label>
-            </div>
-            <div class="col-sm-8 col-md-3">
-              <input type="text" name="Nombre" class="form-control"/>
-            </div>
-            
-            <div class="col-sm-4 col-md-2">
-              <label class="col-form-label">Nombre:</label>
-            </div>
-            <div class="col-sm-8 col-md-2">
-                <input type="text" name="Nombre" class="form-control"/>
-            </div>
-
-            <div class="col-sm-4 col-md-1">
-                <label class="col-form-label">DNI:</label>
-              </div>
-              <div class="col-sm-8 col-md-2">
-                  <input type="text" name="Nombre" class="form-control"/>
-              </div>
-            
-            <p>
-
-            <div class="col-sm-4 col-md-2">
-                <label class="col-form-label">Compañía:</label>
-              </div>
-              <div class="col-sm-8 col-md-4">
-                <select name="select" class="form-control">
-                    <option value="value1">RIO URUGUAY</option>
-                    <option value="value2" selected>CARUSO SEGUROS</option>
-                    <option value="value3">LA NUEVA SEGUROS</option>
-                    <option value="value4">SANCOR SEGUROS</option>
-                  </select>
-              </div>
-              
-              <div class="col-sm-4 col-md-2">
-                <label class="col-form-label">Rama:</label>
-              </div>
-              <div class="col-sm-8 col-md-4">
-                <select name="select" class="form-control">
-                    <option value="value1">AUTO (PATRIMONIAL)</option>
-                    <option value="value2" selected>MOTO (PATRIMONIAL)</option>
-                    <option value="value3">HOGAR (PATRIMONIAL)</option>
-                    <option value="value4">ACCIDENTES PERSONALES</option>
-                    <option value="value4">RETIRO</option>
-                    <option value="value5">VIDA</option>
-                    <option value="value6">LEY DE CONTRATO DE TRABAJO</option>
-                  </select>
-              </div>
-
-          </div>
-      
-          <hr>
-      
-          <!-- Botones -->
-          <div class="row justify-content-center botones">
-
-            <button type="button" class="btn btn-primary">
-                  <i class="fas fa-plus"> </i> 
-                  Agregar
-              </button>
-          </div>
-        </div>
-      </form>
-      
+</form>

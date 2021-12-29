@@ -1,16 +1,27 @@
 div::after {
-    content: "";
-    /* background: url(image.jpg); */
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
+  content: "";
+  /* background: url(image.jpg); */
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  text-align: center;
+
+  /* background-position: center; */
+  /* background-size: 70vh;  */
+}
+
+#divCuerpo{
+  height: 100vh;
+  text-align: center;
+  background-image: url("https://www.65ymas.com/uploads/s1/56/74/32/estos-son-los-seguros-por-los-que-pagara-s-ma-s-este-an-o-por-la-subida-de-la-fiscalidad-foto-bigstock_1_621x621.jpeg");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: 100vh;
   
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwn4XdTpZfJZ4zxbLxbPMKDzcNb_LeYvk4Qw&usqp=CAU");
-    background-repeat: no-repeat;
-    /* background-position: center; */
-    /* background-size: 70vh;  */
-  }
+}
+
