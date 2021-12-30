@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Asegurado } from '../models/asegurado';
 import { AseguradoService } from '../services/asegurado.service';
 
@@ -30,7 +31,8 @@ export class AseguradosComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, 
-              private aseguradoService: AseguradoService ) {
+              private aseguradoService: AseguradoService,
+              private toastr: ToastrService ) {
     this.form = this.fb.group({
       apellido: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -55,7 +57,7 @@ export class AseguradosComponent implements OnInit {
     console.log(asegurado);
     this.aseguradoService.guardarAsegurado(asegurado).then(() => {
       console.log('Asegurado registrado');
-      alert('Asegurado registrado');
+      this.toastr.success('El asegurado se registró exitosamente!', 'Usuario registrado')
       this.form.reset();
     }, error => {
       console.log(error);
