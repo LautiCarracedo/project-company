@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Asegurado } from '../models/asegurado';
 import { AseguradoService } from '../services/asegurado.service';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-asegurados',
@@ -10,6 +11,14 @@ import { AseguradoService } from '../services/asegurado.service';
   styleUrls: ['./asegurados.component.css']
 })
 export class AseguradosComponent implements OnInit {
+  // should the button be shown
+  show: boolean;
+
+  // What text label should it be given
+  label: string;
+
+  // css classes to be used, default is 'btn btn-sm btn-secondary'
+  cssClass: string;
   // opciones del combo compania
   opcionesComp = [
     { compania: 'RIO URUGUAY' },
@@ -38,7 +47,8 @@ export class AseguradosComponent implements OnInit {
       nombre: ['', Validators.required],
       dni: ['', Validators.required],
       compania: ['', Validators.required],
-      ramo: ['', Validators.required]
+      ramo: ['', Validators.required],
+      
     })
    }
 
