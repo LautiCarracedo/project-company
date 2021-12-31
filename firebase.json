@@ -1,7 +1,6 @@
 {
-  "firebase": "proyecto-companias",
   "hosting": {
-    "public": "dist/",
+    "public": "dist/proyecto",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -10,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/"
+        "destination": "/index.html"
       }
     ]
   }

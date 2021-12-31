@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "proyecto-companias": {
-      "hosting": {
-        "proyecto": [
-          "proyecto-companias"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "proyecto-companias"
   }
