@@ -20,11 +20,12 @@ import { ReactiveFormsModule  } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { DatepickerModule } from 'ngx-bootstrap/datepicker';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
+
+
 
 @NgModule({
   declarations: [
@@ -48,9 +49,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule,
-    BsDropdownModule.forRoot(),
-    DatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

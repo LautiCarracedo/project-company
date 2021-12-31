@@ -4,4 +4,6 @@ export class Asegurado {
     dni: string;
     compania: string;
     ramo: string;
+    inicio_poliza: Date;
+    fin_poliza: Date;
 }

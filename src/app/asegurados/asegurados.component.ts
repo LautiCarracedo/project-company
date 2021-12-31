@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { validateEventsArray } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Asegurado } from '../models/asegurado';
 import { AseguradoService } from '../services/asegurado.service';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-asegurados',
@@ -10,14 +13,9 @@ import { AseguradoService } from '../services/asegurado.service';
   styleUrls: ['./asegurados.component.css']
 })
 export class AseguradosComponent implements OnInit {
-  // should the button be shown
-  show: boolean;
+  model1: NgbDateStruct;
+  model2: NgbDateStruct;
 
-  // What text label should it be given
-  label: string;
-
-  // css classes to be used, default is 'btn btn-sm btn-secondary'
-  cssClass: string;
   // opciones del combo compania
   opcionesComp = [
     { compania: 'RIO URUGUAY' },
@@ -47,7 +45,9 @@ export class AseguradosComponent implements OnInit {
       dni: ['', Validators.required],
       compania: ['', Validators.required],
       ramo: ['', Validators.required],
-      
+      inicio_poliza: ['', Validators.required],
+      fin_poliza: ['',Validators.required]
+
     })
    }
 
@@ -61,6 +61,8 @@ export class AseguradosComponent implements OnInit {
       dni: this.form.value.dni,
       compania: this.form.value.compania,
       ramo: this.form.value.ramo,
+      inicio_poliza: this.form.value.inicio_poliza,
+      fin_poliza: this.form.value.fin_poliza
     }
 
     console.log(asegurado);
