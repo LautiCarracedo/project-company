@@ -11,6 +11,7 @@ import { AseguradoService } from '../services/asegurado.service';
 export class ConsultasComponent implements OnInit {
   listAsegurados: Asegurado[] = [];
   consulta_apellido: string;
+  fechas: any = []
 
   constructor(private aseguradoService: AseguradoService, 
               private toastr: ToastrService) { }
@@ -32,17 +33,19 @@ export class ConsultasComponent implements OnInit {
     })
   }
 
-  consultarAsegurado(apellido: any) {
-    this.aseguradoService.obtenerAseguradoFiltro(apellido).subscribe(doc => {
-      this.listAsegurados = [];
-      doc.forEach((element: any) => {
-        this.listAsegurados.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-      console.log(this.listAsegurados);
-    })
+  obtenerFechasPolizas(){
+    
+  }
+
+  consultarAseguradoXApellido() {
+    
+    this.aseguradoService.obtenerAseguradoXApellido(this.consulta_apellido).subscribe(
+      aseg => {
+        console.log(aseg);
+      }
+      
+    )  
+    
   }
 
 }

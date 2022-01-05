@@ -1,18 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { validateEventsArray } from '@angular/fire/compat/firestore';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
+import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Asegurado } from '../models/asegurado';
 import { AseguradoService } from '../services/asegurado.service';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Registro exitoso</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{name}} registrado con éxito!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+
+export class NgbdModalContent {
+  @Input() name;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
 
 @Component({
   selector: 'app-asegurados',
   templateUrl: './asegurados.component.html',
   styleUrls: ['./asegurados.component.css']
 })
+
 export class AseguradosComponent implements OnInit {
+  @Input() name;
   model1: NgbDateStruct;
   model2: NgbDateStruct;
 
@@ -38,7 +62,7 @@ export class AseguradosComponent implements OnInit {
 
   constructor(private fb: FormBuilder, 
               private aseguradoService: AseguradoService,
-              private toastr: ToastrService ) {
+              private modalService: NgbModal ) {
     this.form = this.fb.group({
       apellido: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -52,6 +76,11 @@ export class AseguradosComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  open() {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = 'Asegurado';
   }
 
   crearAsegurado(){
@@ -68,7 +97,6 @@ export class AseguradosComponent implements OnInit {
     console.log(asegurado);
     this.aseguradoService.guardarAsegurado(asegurado).then(() => {
       console.log('Asegurado registrado');
-      this.toastr.success('El asegurado se registró exitosamente!', 'Usuario registrado')
       this.form.reset();
     }, error => {
       console.log(error);

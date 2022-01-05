@@ -24,8 +24,8 @@ export class AseguradoService {
     return this.firebase.collection('asegurados', ref => ref.orderBy('apellido','asc')).snapshotChanges();
   }
 
-  obtenerAseguradoFiltro(apellido: string): Observable<any> {
-    return this.firebase.collection('asegurado').doc(apellido).snapshotChanges();
+  obtenerAseguradoXApellido(apellido: string) {
+    return this.firebase.collection('asegurados', ref => ref.where('apellido','==',apellido)).valueChanges();
   }
 
 }

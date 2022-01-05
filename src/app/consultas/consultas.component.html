@@ -9,7 +9,7 @@
           <label class="col-form-label">Apellido:</label>
         </div>
         <div class="col-sm-8 col-md-3">
-          <input type="text" formControlName="apellido" name="A" class="form-control" placeholder="Apellido" [(ngModel)]="consulta_apellido" (ngSubmit)="consultarAsegurado(consulta_apellido)"/>
+          <input type="search" formControlName="apellido" name="Apellido" class="form-control" placeholder="Apellido" [(ngModel)]="consulta_apellido"/>
         </div>
   
         <p>
@@ -22,13 +22,15 @@
       <!-- Botones -->
       <div class="row justify-content-center botones">
   
-        <button type="submit" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" (click)="consultarAseguradoXApellido()">
           <i class="fas fa-plus"> </i>
           Consultar
         </button> 
       </div>
     </div>
   </form>
+
+  
 
 <div id="divTablaResultados">
   <table class="table table-hover table-sm table-bordered table-striped">
@@ -45,14 +47,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let asegurado of listAsegurados">
+      <tr *ngFor="let asegurado of listAsegurados ">
         <td>{{ asegurado.dni }}</td>
         <td class="text-right">{{ asegurado.apellido }}</td>
         <td class="text-right">{{ asegurado.nombre }}</td>
         <td class="text-right">{{ asegurado.compania }}</td>
         <td class="text-right">{{ asegurado.ramo }}</td>
-        <td class="text-right">{{ asegurado.inicio_poliza }}</td>
-        <td class="text-right">{{ asegurado.fin_poliza }}</td>
+        <td class="text-right">{{ asegurado.inicio_poliza | json }}</td>
+        <td class="text-right">{{ asegurado.fin_poliza | json }}</td>
         <td class="text-center text-nowrap">
           <button class="btn btn-sm btn-outline-primary" title="Consultar">
                     <i class="fas fa-eye"></i>
@@ -65,6 +67,7 @@
                     <i class="fas fa-eye"></i>
                 </button>
         </td>
+      
       </tr>
     </tbody>
   </table>

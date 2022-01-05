@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AseguradosComponent } from './asegurados/asegurados.component';
+import { AseguradosComponent, NgbdModalContent } from './asegurados/asegurados.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ConsultasComponent } from './consultas/consultas.component';
@@ -23,6 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModalConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     BodyComponent,
     AseguradosComponent,
     HomeComponent,
-    ConsultasComponent
+    ConsultasComponent,
+    NgbdModalContent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, AseguradosComponent],
+  exports: [AseguradosComponent]
 })
 export class AppModule { }
