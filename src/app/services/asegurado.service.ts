@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Asegurado } from '../models/asegurado';
 import { Observable, ObservableInput, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AseguradoService {
- 
 
 
 
@@ -24,8 +23,20 @@ export class AseguradoService {
     return this.firebase.collection('asegurados', ref => ref.orderBy('apellido','asc')).snapshotChanges();
   }
 
+  //obtenerAsegurado(){
+  //  return this.firebase.collection('asegurados').valueChanges();
+  //}
+
   obtenerAseguradoXApellido(apellido: string) {
-    return this.firebase.collection('asegurados', ref => ref.where('apellido','==',apellido)).valueChanges();
+    return this.firebase.collection('asegurados', ref => ref.where('apellido','==', apellido)).valueChanges();
+  }
+
+  obtenerAseguradoXRamo(ramo: string) {
+    return this.firebase.collection('asegurados', ref => ref.where('ramo','==', ramo)).valueChanges();
+  }
+
+  obtenerAseguradoXFecha(fecha_inicio: Date, fecha_fin: Date) {
+    return this.firebase.collection('asegurados', ref => ref.where('inicio_poliza','>=', fecha_inicio).where('fin_poliza','<=',fecha_fin)).valueChanges();
   }
 
 }

@@ -1,36 +1,135 @@
 <div class='tituloPagina'>
-    Consultar asegurados
-  </div>
-  
-  <form>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 col-md-2">
-          <label class="col-form-label">Apellido:</label>
-        </div>
-        <div class="col-sm-8 col-md-3">
-          <input type="search" formControlName="apellido" name="Apellido" class="form-control" placeholder="Apellido" [(ngModel)]="consulta_apellido"/>
-        </div>
-  
-        <p>
-  
-  
-      </div>
-  
-      <hr>
-  
-      <!-- Botones -->
-      <div class="row justify-content-center botones">
-  
-        <button type="button" class="btn btn-primary" (click)="consultarAseguradoXApellido()">
-          <i class="fas fa-plus"> </i>
-          Consultar
-        </button> 
-      </div>
-    </div>
-  </form>
+  Consultar asegurados
+</div>
 
-  
+<div class="row justify-content-center botones">
+  <div class=" d-inline-flex p-2 bd-highlight justify-content-center">
+
+    <button type="button" class="btn btn-primary" (click)="touchButtonApellido()">
+      POR APELLIDO <i class="fas fa-search"></i>
+    </button>
+
+
+    <button type="button" class="btn btn-primary" (click)="touchButtonRamo()">
+      POR RAMO <i class="fas fa-search"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary" (click)="touchButtonFechas()">
+      POR FECHA <i class="fas fa-search"></i>
+    </button>
+  </div>
+
+</div>
+
+<form>
+  <div class="container-fluid" *ngIf="mostrarFormConsultaApellido">
+    <div class="row">
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Apellido:</label>
+      </div>
+      <div class="col-sm-8 col-md-3">
+        <input type="search" name="Apellido" class="form-control" placeholder="Apellido" [(ngModel)]="consulta_apellido"
+          (keyup.enter)="consultarAseguradoXApellido()" />
+      </div>
+
+      <p>
+
+    </div>
+
+    <hr>
+
+    <!-- Botones -->
+    <div class="row justify-content-center botones">
+
+      <button type="button" class="btn btn-primary" (click)="consultarAseguradoXApellido()">
+        <i class="fas fa-search"></i>
+        Consultar
+      </button>
+    </div>
+  </div>
+
+  <div class="container-fluid" *ngIf="mostrarFormConsultaRamo">
+    <div class="row">
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Ramo:</label>
+      </div>
+      <div class="col-sm-8 col-md-3">
+        <input type="search" name="Ramo" class="form-control" placeholder="Ramo" [(ngModel)]="consulta_ramo"
+          (keyup.enter)="consultarAseguradoXRamo()" />
+      </div>
+
+      <p>
+
+    </div>
+
+    <hr>
+
+    <!-- Botones -->
+    <div class="row justify-content-center botones">
+
+      <button type="button" class="btn btn-primary" (click)="consultarAseguradoXRamo()">
+        <i class="fas fa-search"> </i>
+        Consultar
+      </button>
+    </div>
+  </div>
+
+  <div class="container-fluid" *ngIf="mostrarFormConsultaFechas">
+    <div class="row">
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Fecha Inicio:</label>
+      </div>
+      <div class="col-sm-8 col-md-3">
+
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="consulta_inicio_poliza"
+          (keyup.enter)="consultarAseguradoXFecha()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-sm-4 col-md-2">
+        <label class="col-form-label">Fecha Fin:</label>
+      </div>
+      <div class="col-sm-8 col-md-3">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp2" ngbDatepicker #p="ngbDatepicker" [(ngModel)]="consulta_fin_poliza"
+          (keyup.enter)="consultarAseguradoXFecha()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button"></button>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <p>
+
+
+    </div>
+
+    <hr>
+
+    <!-- Botones -->
+    <div class="row justify-content-center botones">
+
+      <button type="button" class="btn btn-primary" (click)="consultarAseguradoXFecha()">
+        <i class="fas fa-search"> </i>
+        Consultar
+      </button>
+    </div>
+  </div>
+
+
+</form>
+
+
 
 <div id="divTablaResultados">
   <table class="table table-hover table-sm table-bordered table-striped">
@@ -53,21 +152,20 @@
         <td class="text-right">{{ asegurado.nombre }}</td>
         <td class="text-right">{{ asegurado.compania }}</td>
         <td class="text-right">{{ asegurado.ramo }}</td>
-        <td class="text-right">{{ asegurado.inicio_poliza | json }}</td>
+        <td class="text-right">{{ asegurado.inicio_poliza }}</td>
         <td class="text-right">{{ asegurado.fin_poliza | json }}</td>
         <td class="text-center text-nowrap">
           <button class="btn btn-sm btn-outline-primary" title="Consultar">
-                    <i class="fas fa-eye"></i>
-                </button>
+            <i class="fas fa-eye"></i>
+          </button>
           <button class="btn btn-sm btn-outline-primary" title="Modificar">
-                    <i class="fas fa-pencil-alt"></i>
-                </button>
-          <button class="btn btn-sm"
-                    >
-                    <i class="fas fa-eye"></i>
-                </button>
+            <i class="fas fa-pencil-alt"></i>
+          </button>
+          <button class="btn btn-sm">
+            <i class="fas fa-eye"></i>
+          </button>
         </td>
-      
+
       </tr>
     </tbody>
   </table>
