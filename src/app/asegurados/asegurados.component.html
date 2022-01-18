@@ -6,21 +6,22 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Apellido:</label>
+        <label class="col-form-label"  [class.green-icon]="this.form.get('apellido').valid" [class.red-icon]="this.form.get('apellido').invalid && this.form.get('apellido').touched">Apellido:</label>
       </div>
       <div class="col-sm-8 col-md-3">
-        <input type="text" formControlName="apellido" name="Nombre" class="form-control" placeholder="Apellido" />
+        <input type="text" formControlName="apellido" name="Nombre" class="form-control" placeholder="Apellido"/>
+        
       </div>
 
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Nombre:</label>
+        <label class="col-form-label"  [class.green-icon]="this.form.get('nombre').valid" [class.red-icon]="this.form.get('nombre').invalid && this.form.get('nombre').touched">Nombre:</label>
       </div>
       <div class="col-sm-8 col-md-2">
         <input type="text" formControlName="nombre" name="Nombre" class="form-control" placeholder="Nombre" />
       </div>
 
       <div class="col-sm-4 col-md-1">
-        <label class="col-form-label">DNI:</label>
+        <label class="col-form-label"  [class.green-icon]="this.form.get('dni').valid" [class.red-icon]="this.form.get('dni').invalid && this.form.get('dni').touched">DNI:</label>
       </div>
       <div class="col-sm-8 col-md-2">
         <input type="text" formControlName="dni" name="Nombre" class="form-control" placeholder="DNI (sin puntos)" />
@@ -33,7 +34,7 @@
       <p>
 
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Compañía:</label>
+        <label class="col-form-label"  [class.green-icon]="this.form.get('compania').valid" [class.red-icon]="this.form.get('compania').invalid && this.form.get('compania').touched">Compañía:</label>
       </div>
       <div class="col-sm-8 col-md-4">
         <select name="select" formControlName="compania" class="form-control" placeholder="Compañia">
@@ -44,10 +45,10 @@
       </div>
 
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Rama:</label>
+        <label class="col-form-label"  [class.green-icon]="this.form.get('ramo').valid" [class.red-icon]="this.form.get('ramo').invalid && this.form.get('ramo').touched">Rama:</label>
       </div>
       <div class="col-sm-8 col-md-4">
-        <select name="select" formControlName="ramo" class="form-control" placeholder="Rama">
+        <select class="form-control" name="Ramo" formControlName="ramo"  placeholder="Rama">
           <option *ngFor="let opt of opcionesRama" [ngValue]="opt.rama">
             ‌{{ opt.rama }}
           </option>
@@ -57,11 +58,14 @@
       <p>
 
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Inicio Póliza:</label>
+        <label class="col-form-label" [class.green-icon]="this.form.get('inicio_poliza').valid" [class.red-icon]="this.form.get('inicio_poliza').invalid && this.form.get('inicio_poliza').touched">Inicio Póliza:</label>
       </div>
       <div class="col-sm-8 col-md-4">
-
-        <div class="form-group">
+        <input type="text" formControlName="inicio_poliza" name="Inicio Poliza" class="form-control" placeholder="DD/MM/AAAA" maxlength="10"/>
+        <small *ngIf="fechaInicioNoValida" style="color: red"
+            class="text-danger d-inline-flex m-2 px-4 bd-highlight justify-content-center">Ingrese fecha formato DD/MM/AAAA
+        </small>
+        <!--<div class="form-group">
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" formControlName="inicio_poliza" name="dp1"
               [(ngModel)]="model1" ngbDatepicker #d="ngbDatepicker">
@@ -70,16 +74,19 @@
 
             </div>
           </div>
-        </div>
+        </div>-->
 
       </div>
 
       <div class="col-sm-4 col-md-2">
-        <label class="col-form-label">Fin Póliza:</label>
+        <label class="col-form-label" [class.green-icon]="this.form.get('fin_poliza').valid" [class.red-icon]="this.form.get('fin_poliza').invalid && this.form.get('fin_poliza').touched">Fin Póliza:</label>
       </div>
       <div class="col-sm-8 col-md-4">
-
-        <div class="form-group">
+        <input type="text" formControlName="fin_poliza" name="Fin Poliza" class="form-control" placeholder="DD/MM/AAAA" maxlength="10"/>
+        <small *ngIf="fechaFinNoValida" style="color: red"
+            class="text-danger d-inline-flex m-2 px-4 bd-highlight justify-content-center">Ingrese fecha formato DD/MM/AAAA
+        </small>
+        <!--<div class="form-group">
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" formControlName="fin_poliza" name="dp2"
               [(ngModel)]="model2" ngbDatepicker #p="ngbDatepicker">
@@ -89,7 +96,7 @@
               </div>
 
           </div>
-        </div>
+        </div>-->
 
       </div>
 
@@ -101,7 +108,7 @@
     <!-- Botones -->
     <div class="row justify-content-center botones">
 
-      <button type="submit" class="btn btn-primary" (click)="open()">
+      <button [disabled]="form.invalid" type="submit" class="btn btn-primary" (click)="open()">
         <i class="fas fa-plus"> </i>
         Agregar
       </button>

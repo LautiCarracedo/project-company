@@ -80,15 +80,17 @@
         <label class="col-form-label">Fecha Inicio:</label>
       </div>
       <div class="col-sm-8 col-md-3">
+        <input type="search" name="Inicio Poliza" class="form-control" placeholder="Inicio Poliza" [(ngModel)]="consulta_inicio_poliza"
+          (keyup.enter)="consultarAseguradoXFecha()" />
 
-        <div class="input-group">
+        <!--<div class="input-group">
           <input class="form-control" placeholder="yyyy-mm-dd" name="dp1" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="consulta_inicio_poliza"
           (keyup.enter)="consultarAseguradoXFecha()">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
 
           </div>
-        </div>
+        </div>-->
 
       </div>
 
@@ -97,7 +99,10 @@
         <label class="col-form-label">Fecha Fin:</label>
       </div>
       <div class="col-sm-8 col-md-3">
-        <div class="input-group">
+        <input type="search" name="Fin Poliza" class="form-control" placeholder="Fin Poliza" [(ngModel)]="consulta_fin_poliza"
+          (keyup.enter)="consultarAseguradoXFecha()" />
+        
+        <!--<div class="input-group">
           <input class="form-control" placeholder="yyyy-mm-dd" name="dp2" ngbDatepicker #p="ngbDatepicker" [(ngModel)]="consulta_fin_poliza"
           (keyup.enter)="consultarAseguradoXFecha()">
           <div class="input-group-append">
@@ -105,7 +110,7 @@
 
           </div>
 
-        </div>
+        </div>-->
       </div>
 
 
@@ -153,7 +158,7 @@
         <td class="text-right">{{ asegurado.compania }}</td>
         <td class="text-right">{{ asegurado.ramo }}</td>
         <td class="text-right">{{ asegurado.inicio_poliza }}</td>
-        <td class="text-right">{{ asegurado.fin_poliza | json }}</td>
+        <td class="text-right">{{ asegurado.fin_poliza }}</td>
         <td class="text-center text-nowrap">
           <button class="btn btn-sm btn-outline-primary" title="Consultar">
             <i class="fas fa-eye"></i>
@@ -161,12 +166,28 @@
           <button class="btn btn-sm btn-outline-primary" title="Modificar">
             <i class="fas fa-pencil-alt"></i>
           </button>
-          <button class="btn btn-sm">
-            <i class="fas fa-eye"></i>
+          <button class="btn btn-sm btn-outline-primary" title="Eliminar">
+            <i (click)="eliminarAsegurado(asegurado.id)" class="fas fa-trash-alt"></i>
           </button>
+
         </td>
 
       </tr>
     </tbody>
   </table>
+
+   <!-- Paginador-->
+   <div class="paginador">
+    <div class="row">
+      <div class="col">
+        <span class="pyBadge">Registros: {{RegistrosTotal}}</span>
+      </div>
+      <div class="col text-center">
+        <ngb-pagination [(page)]="Pagina" [pageSize]="10" [maxSize]="10"
+          [collectionSize]="RegistrosTotal"></ngb-pagination>
+      </div>
+      
+    </div>
+  
+</div>
 </div>

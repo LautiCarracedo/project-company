@@ -36,7 +36,11 @@ export class AseguradoService {
   }
 
   obtenerAseguradoXFecha(fecha_inicio: Date, fecha_fin: Date) {
-    return this.firebase.collection('asegurados', ref => ref.where('inicio_poliza','>=', fecha_inicio).where('fin_poliza','<=',fecha_fin)).valueChanges();
+    return this.firebase.collection('asegurados', ref => ref.where('fin_poliza','>=', fecha_inicio).where('fin_poliza','<=',fecha_fin)).valueChanges();
+  }
+
+  eliminarAsegurado(dni: string): Promise<any> {
+    return this.firebase.collection('asegurados').doc(dni).delete();
   }
 
 }

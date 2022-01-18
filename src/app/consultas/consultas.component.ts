@@ -8,16 +8,16 @@ import { NgbActiveModal, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootst
   selector: 'ngbd-modal-content',
   template: `
     <div class="modal-header">
-      <h4 class="modal-title">Registro exitoso</h4>
+      <h4 class="modal-title">Eliminación exitosa</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>{{name}} registrado con éxito!</p>
+      <p>{{name}} eliminado con éxito!</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
     </div>
   `
 })
@@ -39,6 +39,8 @@ export class ConsultasComponent implements OnInit {
   public consulta_ramo: string;
   public consulta_inicio_poliza: Date;
   public consulta_fin_poliza: Date;
+  RegistrosTotal: number;
+  Pagina = 1; // inicia pagina 1
   
   mostrarFormConsultaApellido: boolean = false;
   mostrarFormConsultaRamo: boolean = false;
@@ -73,9 +75,9 @@ export class ConsultasComponent implements OnInit {
   }
 
   obtenerAsegurados(){
-    this.aseguradoService.obtenerAsegurado().subscribe(doc => {
+    this.aseguradoService.obtenerAsegurado().subscribe(data => {
       this.listAsegurados = [];
-      doc.forEach((element: any) => {
+      data.forEach((element: any) => {
         this.listAsegurados.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
@@ -133,4 +135,16 @@ export class ConsultasComponent implements OnInit {
       return;
     }
   }
+
+  eliminarAsegurado(dni: string){
+    this.aseguradoService.eliminarAsegurado(dni).then(() => {
+      console.log("Asegurado eliminado con exito");
+      const modalRef = this.modalService.open(NgbdModalContent);
+      modalRef.componentInstance.name = 'Asegurado';
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
+  
 }

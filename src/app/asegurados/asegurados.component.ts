@@ -46,12 +46,19 @@ export class AseguradosComponent implements OnInit {
     { compania: 'CARUSO SEGUROS' },
     { compania: 'SANCOR SEGUROS' },
     { compania: 'LA NUEVA SEGUROS' },
+    { compania: 'TRIUNFO SEGUROS' },
+    { compania: 'EXPERTA SEGUROS' },
+    { compania: 'SAN CRISTOBAL SEGUROS' },
+    { compania: 'ORÍGENES' },
+    { compania: 'ASOCIART ART' },
+    { compania: 'PROVINCIA ART' },
+    { compania: 'PREVENCIÓN ART' },
   ];
 
   opcionesRama = [
-    { rama: 'AUTO (PATRIMONIAL)' },
-    { rama: 'MOTO (PATRIMONIAL)' },
-    { rama: 'HOGAR (PATRIMONIAL' },
+    { rama: 'AUTO' },
+    { rama: 'MOTO' },
+    { rama: 'HOGAR' },
     { rama: 'ACCIDENTES PERSONALES' },
     { rama: 'RETIRO' },
     { rama: 'VIDA' },
@@ -69,11 +76,21 @@ export class AseguradosComponent implements OnInit {
       dni: ['', Validators.required],
       compania: ['', Validators.required],
       ramo: ['', Validators.required],
-      inicio_poliza: ['', Validators.required],
-      fin_poliza: ['',Validators.required]
+      inicio_poliza: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      fin_poliza: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
 
     })
    }
+
+  get fechaInicioNoValida(){
+    return this.form.get('inicio_poliza').invalid && this.form.get('inicio_poliza').touched;
+  }
+
+  get fechaFinNoValida(){
+    return this.form.get('fin_poliza').invalid && this.form.get('fin_poliza').touched;
+  }
+
+
 
   ngOnInit(): void {
   }
